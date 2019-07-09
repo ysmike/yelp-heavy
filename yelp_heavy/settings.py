@@ -17,6 +17,9 @@ NEWSPIDER_MODULE = "yelp_heavy.spiders"
 FEED_FORMAT = "jsonlines"
 FEED_URI = "json/yelp_heavy.json"
 
+# LOG_FILE = "yelp_heavy.log"
+# LOG_LEVEL = "ERROR"
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'yelp_heavy (+http://www.yourdomain.com)'
 

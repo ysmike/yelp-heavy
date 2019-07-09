@@ -33,7 +33,10 @@ def avg_last_20_reviews(reviews_on_page):
     total = 0.0
     for review in reviews_on_page:
         total += review["reviewRating"]["ratingValue"]
-    return float(f"{total / len(reviews_on_page):0.3f}")
+    try:
+        return float(f"{total / len(reviews_on_page):0.3f}")
+    except ZeroDivisionError:
+        return None
 
 
 def percent_calc(fraction):

@@ -1,5 +1,21 @@
 # Functions to parse raw data
 import json
+import re
+from urllib import parse
+
+
+def latlng_parse(link):
+    _, query_string = parse.splitquery(link)
+    query = parse.parse_qs(query_string)
+    try:
+        latlng = query["center"]
+        latitude, longitude = [float(i) for i in latlng[0].split(",")]
+    except TypeError:
+        regex_search = re.search(r"png%7C(.*?)%2C(.*?)&", link).groups()
+        latitude, longitude = [float(i) for i in regex_search]
+    except:
+        latitude, longitude = None, None
+    return latitude, longitude
 
 
 def decode_json(string):

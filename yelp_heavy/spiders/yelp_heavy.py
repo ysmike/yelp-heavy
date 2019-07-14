@@ -46,12 +46,14 @@ class PleySpider(CrawlSpider):
         "https://www.yelp.com/search?find_desc=restaurants&start=0&l=g:-73.93330696668869,40.74828429971376,-73.96025780287033,40.73202631238078",
         "https://www.yelp.com/search?find_desc=restaurants&start=0&l=g:-73.92841461744553,40.758872625231,-73.95536545362717,40.742617226430866",
         "https://www.yelp.com/search?find_desc=restaurants&start=0&l=g:-73.92066227816343,40.771476539452856,-73.94761311434507,40.75522422266145",
-        "https://www.yelp.com/search?find_desc=restaurants&start=0&l=g:-73.90999082281434,40.78238404983916,-73.93694165899598,40.76613440087346"
-        # "https://www.yelp.com/search?find_desc=restaurants&find_loc=Theater%20District%2C%20Manhattan%2C%20NY&l=g%3A-73.97987510892449%2C40.76133781027203%2C-73.98626949521599%2C40.75646178872317&start=150"
+        "https://www.yelp.com/search?find_desc=restaurants&start=0&l=g:-73.90999082281434,40.78238404983916,-73.93694165899598,40.76613440087346",
+        "https://www.yelp.com/search?find_desc=restaurants&l=g%3A-73.99865558473027%2C40.73373166548556%2C-74.01144423551375%2C40.723975215820616",
+        "https://www.yelp.com/search?find_desc=restaurants&l=g%3A-73.80377718924353%2C40.785543900884015%2C-73.85493179237744%2C40.746539921754",
+        # "https://www.yelp.com/search?find_desc=atoboy&find_loc=Queens%2C+NY&ns=1"
     ]
 
     # xpaths for vertical & horizontal crawls
-    # note: xpaths should point to elements containing links, but not the href attributes
+    # note: xpaths should point to elements containing links, but not the href attributes themselves
     # note: xpaths are subject to change based on the updates on the website
     vertical_crawl = "//h3[@class='lemon--h3__373c0__sQmiG heading--h3__373c0__1n4Of alternate__373c0__1uacp']/a"
     horizontal_crawl = "//a[@class='lemon--a__373c0__IEZFH link__373c0__29943 next-link navigation-button__373c0__1D3Ug link-color--blue-dark__373c0__1mhJo link-size--default__373c0__1skgq']"
@@ -69,7 +71,7 @@ class PleySpider(CrawlSpider):
         ),
     )
 
-    # name of this function CANNOT be 'parse' as it'd collide with another 'parse' in the CrawlSpider class above
+    # name of this function cannot be 'parse' as it'd collide with another 'parse' method in the CrawlSpider class above
     def parse_content(self, response):
         # json to be dissected
         json = hf.decode_json(
@@ -93,14 +95,17 @@ class PleySpider(CrawlSpider):
         )
         address = f"{street_address}, {city}, {state} {postalcode}"
 
-        # rest of the data
-        category = list(
-            set(
-                response.xpath(
-                    "//span[contains(@class,'category-str-list')]//a//text()"
-                ).getall()
-            )
-        )
+        # category search for the old Yelp layout
+        xpath_category = response.xpath(
+            "//span[contains(@class,'category-str-list')]//a//text()"
+        ).getall()
+        if xpath_category:
+            category = list(set(xpath_category))
+        # category search for the new Yelp layout
+        else:
+            category = response.xpath(
+                "//span[@class='lemon--span__373c0__3997G text__373c0__2pB8f text-color--normal__373c0__K_MKN text-align--left__373c0__2pnx_ text-size--large__373c0__1568g']/a/text()"
+            ).getall()
 
         link = response.urljoin(
             response.xpath("//a[@data-analytics-label='biz-name']//@href").get()
@@ -110,15 +115,20 @@ class PleySpider(CrawlSpider):
             "//div[@class='lightbox-map hidden']/@data-map-state"
         ).get()
 
-        # potential areas of error due to certain businesses not having histogram or coordinates
+        # location search
         try:
-            longitude = hf.decode_json(map_info)["center"]["longitude"]
             latitude = hf.decode_json(map_info)["center"]["latitude"]
+            longitude = hf.decode_json(map_info)["center"]["longitude"]
         except:
-            longitude, latitude = None, None
+            maps_link = response.xpath(
+                "//div[@class='lemon--div__373c0__1mboc container__373c0__3zHLO border-color--default__373c0__2oFDT overflow--hidden__373c0__8Jq2I']/img/@src"
+            ).get()
+            latitude, longitude = hf.latlng_parse(maps_link)
 
         coordinates = [longitude, latitude]
         geo_json = {"type": "Point", "coordinates": coordinates}
+
+        # potential areas of error due to certain businesses without histograms
         raw_histogram = response.xpath(
             "//td[contains(@class,'histogram')]/text()"
         ).getall()
@@ -160,6 +170,7 @@ class PleySpider(CrawlSpider):
             "aggregateRating": rating,
             "recentRating": recent_rating,
             "cuisine": category,
+            "price_range": price_range,
             "telephone": phone,
             "link": link,
             "address": address,

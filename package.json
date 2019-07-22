@@ -1,0 +1,28 @@
+{
+  "name": "yelp_heavy",
+  "version": "1.0.0",
+  "description": "Providing a more granular perspective of Yelp using MERN stack and Scrapy",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ysmike/yelp-heavy.git"
+  },
+  "author": "Mike Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ysmike/yelp-heavy/issues"
+  },
+  "homepage": "https://github.com/ysmike/yelp-heavy#readme",
+  "dependencies": {
+    "concurrently": "^4.1.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}

@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Restaurants = require("./restaurants");
+const Restaurants = require("./models/restaurants");
 
 const app = express();
 app.set("json spaces", 2); // number of spaces for indentation
@@ -21,8 +21,6 @@ app.get("/", (req, res) => {
     .gt(200)
     .where("price_range")
     .equals("$$$")
-    .where("cuisine")
-    .nin(["Vegan"])
     .limit(100)
     .sort("-percent_high")
     .select("-_id")

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Restaurants = require("./models/restaurants");
 
 const app = express();
-app.set("json spaces", 2); // number of spaces for indentation
+app.set("json spaces", 2); // set number of spaces for indentation
 
 // DB config using Mongo Atlas
 const uri = require("./config/keys").mongoURI;

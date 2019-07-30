@@ -1,14 +1,23 @@
 import React, { Component } from "react";
-import AppNavbar from "./components/AppNavbar";
-import BootstrapTable from "./components/BootstrapTable";
+import DataTable from "./components/DataTable";
+
+import axios from "axios";
 import "./App.css";
 
 class App extends Component {
+  state = {
+    restaurants: []
+  };
+
+  async componentDidMount() {
+    const response = await axios.get("/api/restaurants");
+    this.setState({ restaurants: response.data });
+  }
+
   render() {
     return (
       <div className="App">
-        <AppNavbar />
-        <BootstrapTable />
+        <DataTable restaurants={this.state.restaurants} />
       </div>
     );
   }

@@ -15,18 +15,22 @@ mongoose
   .catch(err => console.log(err));
 
 // @route GET
-app.get("/", (req, res) => {
-  Restaurants.find()
-    .where("reviewCount")
-    .gt(200)
-    .where("price_range")
-    .equals("$$$")
-    .limit(100)
+app.get("/api/restaurants", async (req, res) => {
+  const docs = await Restaurants.find()
     .sort("-percent_high")
-    .select("-_id")
-    .then(docs => res.json(docs))
-    .catch(err => res.status(404).json({ success: false }));
+    .limit(100)
+    .select("-_id");
+
+  res.send(docs);
 });
+
+// express will serve up client production assets
+// app.use(express.static('client/build'));
+// express will serve up index.html if it doesn't recognize route
+// const path = require('path');
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+// });
 
 const port = process.env.PORT || 5000;
 

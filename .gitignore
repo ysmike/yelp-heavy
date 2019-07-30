@@ -1,6 +1,7 @@
 # files
 .DS_Store
 *.py[cod]
+mongo_import.py
 
 # folders
 __pycache__/

@@ -147,6 +147,7 @@ class PleySpider(CrawlSpider):
             percent_of_1 = hf.percent_calc(num_of_1_stars / num_of_reviews)
             percent_high = hf.turn_to_float(percent_of_5 + percent_of_4)
             percent_low = hf.turn_to_float(percent_of_2 + percent_of_1)
+            approval_rating = hf.turn_to_float(percent_high - percent_low)
         except IndexError or TypeError:
             num_of_5_stars = None
             num_of_4_stars = None
@@ -160,18 +161,25 @@ class PleySpider(CrawlSpider):
             percent_of_1 = None
             percent_high = None
             percent_low = None
+            approval_rating = None
 
         # structure of the final output
         data = {
             "name": name,
-            "reviewCount": num_of_reviews,
+            "review_count": num_of_reviews,
+            "approval_rating": approval_rating,
             "percent_high": percent_high,
             "percent_low": percent_low,
-            "aggregateRating": rating,
-            "recentRating": recent_rating,
-            "cuisine": category,
+            "percent_of_5": percent_of_5,
+            "percent_of_4": percent_of_4,
+            "percent_of_3": percent_of_3,
+            "percent_of_2": percent_of_2,
+            "percent_of_1": percent_of_1,
+            "aggregate_rating": rating,
+            "recent_rating": recent_rating,
+            "category": category,
             "price_range": price_range,
-            "telephone": phone,
+            "phone": phone,
             "link": link,
             "address": address,
             "longitude": longitude,

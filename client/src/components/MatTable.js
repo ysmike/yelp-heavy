@@ -2,14 +2,6 @@ import React, { Component } from "react";
 import MaterialTable from "material-table";
 
 class MatTable extends Component {
-  state = {
-    loading: true
-  };
-
-  componentWillMount() {
-    this.setState({ loading: false });
-  }
-  // median: 49 approval ratio & 78 review count
   render() {
     return (
       <div style={{ maxWidth: "100%" }}>
@@ -29,6 +21,7 @@ class MatTable extends Component {
                 fontSize: "1rem",
                 whiteSpace: "nowrap"
               },
+              // median: 49 approval ratio
               defaultFilter: "39",
               defaultSort: "desc",
               customFilterAndSearch: (num, rowData) =>
@@ -39,6 +32,7 @@ class MatTable extends Component {
               field: "review_count",
               type: "numeric",
               cellStyle: { fontSize: "1rem", whiteSpace: "nowrap" },
+              // median: 78 review count
               defaultFilter: "211",
               customFilterAndSearch: (num, rowData) =>
                 num <= rowData.review_count

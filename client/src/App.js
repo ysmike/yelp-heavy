@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import DataTable from "./components/DataTable";
-
+import MatTable from "./components/MatTable";
+import Logo from "./components/Logo";
 import axios from "axios";
-import "./App.css";
 
 class App extends Component {
   state = {
@@ -14,10 +13,24 @@ class App extends Component {
     this.setState({ restaurants: response.data });
   }
 
+  // filterToShowAmericanOnly() {
+  //   console.log("hello");
+  //   const restaurants = this.state.restaurants;
+  //   const filtered = restaurants.filter(restaurant => {
+  //     if (restaurant.category.includes("Chinese")) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   });
+  //   this.setState({ restaurants: filtered });
+  // }
+
   render() {
     return (
       <div className="App">
-        <DataTable restaurants={this.state.restaurants} />
+        <Logo />
+        <MatTable restaurants={this.state.restaurants} />
       </div>
     );
   }

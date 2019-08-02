@@ -18,8 +18,9 @@ mongoose
 app.get("/api/restaurants", async (req, res) => {
   const docs = await Restaurants.find()
     .sort("-percent_high")
-    .limit(100)
-    .select("-_id");
+    .select(
+      "-_id -percent_high -percent_low -percent_of_5 -percent_of_4 -percent_of_3 -percent_of_2 -percent_of_1 -aggregate_rating -phone -GeoJSON"
+    );
 
   res.send(docs);
 });

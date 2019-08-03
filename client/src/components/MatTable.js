@@ -50,12 +50,6 @@ class MatTable extends Component {
               emptyValue: "-",
               defaultFilter: "$"
             }
-            // {
-            //   title: "Address",
-            //   field: "address",
-            //   cellStyle: { fontSize: "1rem" },
-            //   filtering: false
-            // }
           ]}
           data={this.props.restaurants}
           title="Restaurants in NYC"
@@ -100,7 +94,7 @@ class MatTable extends Component {
               filterRow: {
                 filterTooltip: "Set minimum"
               },
-              emptyDataSourceMessage: "No match under these criteria"
+              emptyDataSourceMessage: "Loading..."
             },
             toolbar: {
               searchPlaceholder: "Name or Cuisine"

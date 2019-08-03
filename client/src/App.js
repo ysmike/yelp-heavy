@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MatTable from "./components/MatTable";
 import Logo from "./components/Logo";
+import Github from "./components/Github";
 import axios from "axios";
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
     return (
       <div className="App">
         <Logo />
+        <Github />
         <MatTable restaurants={this.state.restaurants} />
       </div>
     );

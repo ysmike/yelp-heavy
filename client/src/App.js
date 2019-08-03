@@ -3,6 +3,7 @@ import MatTable from "./components/MatTable";
 import Logo from "./components/Logo";
 import Github from "./components/Github";
 import axios from "axios";
+import "./app.css";
 
 class App extends Component {
   state = {
@@ -30,8 +31,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Logo />
-        <Github />
+        <div className="header-container">
+          <div style={{ height: "50px" }} />
+          <Logo />
+          <Github />
+        </div>
         <MatTable restaurants={this.state.restaurants} />
       </div>
     );

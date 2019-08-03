@@ -5,9 +5,9 @@ import "./logo.css";
 class Logo extends Component {
   render() {
     return (
-      <div className="wrapper">
-        <a className="logo-wrapper" href="/">
-          <img src={logo} alt="logo" className="logo" />
+      <div className="main-wrapper">
+        <a className="main-logo-wrapper" href="/">
+          <img src={logo} alt="logo" className="main-logo" />
         </a>
       </div>
     );

@@ -1,14 +1,11 @@
-.wrapper {
-  text-align: middle;
+.github-wrapper {
+  text-align: center;
 }
 
-.logo-wrapper {
+.github-logo-wrapper {
   display: inline-block;
 }
 
-.logo {
-  height: 80px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-top: 3px;
+.github-logo {
+  height: 50px;
 }

@@ -1,14 +1,12 @@
-.wrapper {
+.main-wrapper {
   text-align: center;
 }
 
-.logo-wrapper {
+.main-logo-wrapper {
   display: inline-block;
 }
 
-.logo {
-  height: 80px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-top: 3px;
+.main-logo {
+  height: 85px;
+  margin-top: 10px;
 }

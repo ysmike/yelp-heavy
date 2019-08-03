@@ -5,13 +5,13 @@ import "./github.css";
 class Github extends Component {
   render() {
     return (
-      <div className="wrapper">
+      <div className="github-wrapper">
         <a
-          className="logo-wrapper"
+          className="github-logo-wrapper"
           href="https://github.com/ysmike/yelp-heavy"
           target="_blank"
         >
-          <img src={github} alt="logo" className="logo" />
+          <img src={github} className="github-logo" />
         </a>
       </div>
     );

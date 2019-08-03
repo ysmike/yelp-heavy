@@ -26,12 +26,12 @@ app.get("/api/restaurants", async (req, res) => {
 });
 
 // express will serve up client production assets
-// app.use(express.static('client/build'));
+app.use(express.static("client/build"));
 // express will serve up index.html if it doesn't recognize route
-// const path = require('path');
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-// });
+const path = require("path");
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
 
 const port = process.env.PORT || 5000;
 

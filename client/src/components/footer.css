@@ -1,0 +1,27 @@
+/* footer style */
+.footer-style {
+  font-family: Roboto;
+  font-size: 0.9rem;
+  margin-left: 25px;
+}
+
+/* unvisited link */
+a:link {
+  color: mediumpurple;
+  text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+  color: mediumseagreen;
+}
+
+/* mouse over link */
+a:hover {
+  color: gray;
+}
+
+/* selected link */
+a:active {
+  color: gray;
+}

@@ -7,7 +7,7 @@ class Logo extends Component {
     return (
       <div className="main-wrapper">
         <a className="main-logo-wrapper" href="/">
-          <img src={logo} alt="logo" className="main-logo" />
+          <img src={logo} alt="main-logo" className="main-logo" />
         </a>
       </div>
     );

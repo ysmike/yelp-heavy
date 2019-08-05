@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MatTable from "./components/MatTable";
 import Logo from "./components/Logo";
 import Github from "./components/Github";
+import Footer from "./components/Footer";
 import axios from "axios";
 import "./app.css";
 
@@ -37,6 +38,7 @@ class App extends Component {
           <Github />
         </div>
         <MatTable restaurants={this.state.restaurants} />
+        <Footer />
       </div>
     );
   }

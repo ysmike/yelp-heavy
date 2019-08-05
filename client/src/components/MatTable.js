@@ -14,7 +14,7 @@ class MatTable extends Component {
               filtering: false
             },
             {
-              title: "Approval Ratio",
+              title: "Approval Ratio*",
               field: "approval_rating",
               type: "numeric",
               cellStyle: {

@@ -10,8 +10,9 @@ class Github extends Component {
           className="github-logo-wrapper"
           href="https://github.com/ysmike/yelp-heavy"
           target="_blank"
+          rel="noopener noreferrer"
         >
-          <img src={github} className="github-logo" />
+          <img src={github} alt="github-logo" className="github-logo" />
         </a>
       </div>
     );

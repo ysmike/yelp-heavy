@@ -7,6 +7,7 @@ mongo_import.py
 __pycache__/
 json/
 node_modules/
+config/
 
 # production
 build/

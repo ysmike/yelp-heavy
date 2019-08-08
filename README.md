@@ -1,13 +1,14 @@
 # 🚀 Yelp Heavy
 
-Coined after Falcon Heavy, <a href="http://yelp-heavy.herokuapp.com/" target="_blank">**Yelp Heavy**</a> is a dynamic table that provides rankings of the restaurants in New York City, taking both positive and negative reviews into account.
+Coined after Falcon Heavy, <a href="http://yelp-heavy.herokuapp.com/" target="_blank" >**Yelp Heavy**</a> is a dynamic table that provides rankings of the restaurants in New York City, taking both positive and negative reviews into account.
 
 ## 🔨 Usage
 
 <img src="https://raw.githubusercontent.com/ysmike/yelp-heavy/master/client/src/images/readme_img.png" style="max-width:100%"/>
+
 1. Approval rating
 
-    > A score that represents the percentage of positive reviews subtracted by the percentage of negative reviews, ranging from -100 to 100. A restaurant with the approval rating of 100 means that all of its reviews are positive (4 or 5 stars), whereas a restaurant with -100 approval rating has only negative reviews (1 or 2 stars).
+   > A score that represents the percentage of positive reviews subtracted by the percentage of negative reviews, ranging from -100 to 100. A restaurant with the approval rating of 100 means that all of its reviews are positive (4 or 5 stars), whereas a restaurant with -100 approval rating has only negative reviews (1 or 2 stars).
 
 2. Search box
 

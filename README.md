@@ -42,11 +42,11 @@ Coined after Falcon Heavy, <a href="http://yelp-heavy.herokuapp.com/" target="_b
 
 - Can you give an example of how approval ratio is calculated?
 
-  > Houseman, for example, has 100 reviews at the time of this writing. 68 of the reviews are either 4 stars or 5 stars. 12 of the reviews are either 1 star or 2 stars. So the approval ratio for Houseman is (68 - 12) / 100 which is 56%.
+  > The restaurant called Houseman, for example, has a total of 100 reviews at the time of this writing. 68 of them are either 4- or 5-star reviews, and 12 of them are either 1- or 2-star reviews. To get the approval ratio, we need to subtract the number of negative reviews from the number of positive reviews, then divide the result by the total review count. So the approval ratio for Houseman is (68 - 12) / 100 which is 56%.
 
 - Why did you start this project?
 
-  > I love exploring restaurants. But also I'm Iazy and don't want to go out unless I know that it will be an above par experience. So information is key. Yelp to me is the best source of truth because the reviews are crowd-sourced. But it's sometimes hard to differentiate the two 4.5 starred restaurants. To solve this issue, I present to you one way of distinguishing restaurants on a more granular level, using approval ratio.
+  > I love exploring restaurants. But also I'm picky and don't want to go out unless I know that it will be an above par experience. So information is key. Yelp to me is the best source of truth because the reviews are crowd-sourced. But it's sometimes hard to differentiate the two 4.5 starred restaurants. To solve this issue, I present to you one way of distinguishing restaurants on a more granular level, using approval ratio.
 
 - How accurate is the approval ratio?
 

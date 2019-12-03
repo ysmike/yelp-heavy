@@ -50,14 +50,21 @@ def avg_last_20_reviews(reviews_on_page):
     for review in reviews_on_page:
         total += review["reviewRating"]["ratingValue"]
     try:
-        return float(f"{total / len(reviews_on_page):0.3f}")
+        return float(f"{total / len(reviews_on_page):0.1f}")
     except ZeroDivisionError:
         return None
 
 
 def percent_calc(fraction):
-    return float(f"{(fraction * 100):0.3f}")
+    return float(f"{(fraction * 100):0.1f}")
 
 
 def turn_to_float(number):
-    return float(f"{number:0.3f}")
+    return float(f"{number:0.1f}")
+
+
+def decode_script(raw_script):
+    start = raw_script.find('{"largestCount')
+    end = raw_script.find('"label":"1 star"}]}') + 19
+    histogram = json.loads(raw_script[start:end])["histogramData"]
+    return histogram

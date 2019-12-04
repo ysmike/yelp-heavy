@@ -11,8 +11,8 @@ from yelp_heavy.spiders import helper_func as hf
 class PleySpider(CrawlSpider):
     name = "pley"
     start_urls = [
-        # "https://www.yelp.com/search?find_desc=restaurants&start=0&l=g:-73.95131989913568,40.8042612146712,-73.97827073531732,40.78801691833214",
-        # "https://www.yelp.com/search?find_desc=restaurants&start=0&l=g:-73.93348657937895,40.79850557548142,-73.96043741556059,40.78225987069604",
+        "https://www.yelp.com/search?find_desc=restaurants&start=0&l=g:-73.95131989913568,40.8042612146712,-73.97827073531732,40.78801691833214",
+        "https://www.yelp.com/search?find_desc=restaurants&start=0&l=g:-73.93348657937895,40.79850557548142,-73.96043741556059,40.78225987069604",
         "https://www.yelp.com/search?find_desc=restaurants&start=0&l=g:-73.96113389452898,40.792297243914476,-73.98808473071063,40.77605002008952",
         "https://www.yelp.com/search?find_desc=restaurants&start=0&l=g:-73.94239990724373,40.78561852924349,-73.96935074342537,40.76936967149986",
         "https://www.yelp.com/search?find_desc=restaurants&start=0&l=g:-73.9694118062896,40.7781260176433,-73.99636264247124,40.76187532715193",
@@ -56,7 +56,6 @@ class PleySpider(CrawlSpider):
     # xpaths are subject to change based on the updates on the website
     # xpaths should point to the elements containing links, but not the href attributes themselves
     vertical_crawl = "//p[@class='lemon--p__373c0__3Qnnj text__373c0__2pB8f text-color--black-regular__373c0__38bRH text-align--left__373c0__2pnx_ text-size--inherit__373c0__2gFQ3']/a"
-    # [last()] is used to capture the 'next' button instead of 'previous' as they use the same class
     horizontal_crawl = (
         "(//a[starts-with(@href, '/search?find_desc=restaurants&')])[last()]"
     )
@@ -77,27 +76,27 @@ class PleySpider(CrawlSpider):
     # name of this function cannot be 'parse' to avoid collision with another 'parse' method in the imported CrawlSpider class
     def parse_content(self, response):
         # json to be dissected
-        _json = hf.decode_json(
+        json_ = hf.decode_json(
             response.xpath("//script[@type='application/ld+json'][last()]/text()").get()
         )
 
         # basic data extracted from json
-        name = _json["name"]
-        phone = hf.phone_number_clean_up(_json["telephone"])
-        price_range = hf.determine_price_range(_json["priceRange"])
+        name = json_["name"]
+        phone = hf.phone_number_clean_up(json_["telephone"])
+        price_range = hf.determine_price_range(json_["priceRange"])
         try:
-            num_of_reviews = int(_json.get("aggregateRating").get("reviewCount"))
-            rating = float(_json.get("aggregateRating").get("ratingValue"))
+            num_of_reviews = int(json_.get("aggregateRating").get("reviewCount"))
+            rating = float(json_.get("aggregateRating").get("ratingValue"))
         except:
             num_of_reviews, rating = None, None
 
-        recent_rating = hf.avg_last_20_reviews(_json["review"])
-        city = _json["address"]["addressLocality"]
-        state = _json["address"]["addressRegion"]
-        street_address = _json["address"]["streetAddress"]
+        recent_rating = hf.avg_last_20_reviews(json_["review"])
+        city = json_["address"]["addressLocality"]
+        state = json_["address"]["addressRegion"]
+        street_address = json_["address"]["streetAddress"]
         postalcode = (
-            int(_json["address"]["postalCode"])
-            if _json["address"]["postalCode"]
+            int(json_["address"]["postalCode"])
+            if json_["address"]["postalCode"]
             else None
         )
         address = f"{street_address}, {city}, {state} {postalcode}"
@@ -142,7 +141,6 @@ class PleySpider(CrawlSpider):
             response.xpath("//script[contains(text(), 'ratingHistogram')]/text()").get()
         )
 
-        # try:
         num_of_5_stars = histogram[0]["count"]
         num_of_4_stars = histogram[1]["count"]
         num_of_3_stars = histogram[2]["count"]
@@ -166,20 +164,6 @@ class PleySpider(CrawlSpider):
             percent_high = None
             percent_low = None
             approval_rating = None
-        # except IndexError or TypeError:
-        #     num_of_5_stars = None
-        #     num_of_4_stars = None
-        #     num_of_3_stars = None
-        #     num_of_2_stars = None
-        #     num_of_1_stars = None
-        #     percent_of_5 = None
-        #     percent_of_4 = None
-        #     percent_of_3 = None
-        #     percent_of_2 = None
-        #     percent_of_1 = None
-        #     percent_high = None
-        #     percent_low = None
-        #     approval_rating = None
 
         # structure of the final output
         data = {

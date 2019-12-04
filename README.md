@@ -50,7 +50,7 @@ Coined after Falcon Heavy, <a href="http://yelp-heavy.herokuapp.com/" target="_b
 
 - How accurate is the approval ratio?
 
-  > Pretty accurate. I've tried more than a few of the restaurants with high approval ratio for the first time and they've all been well worth the money. But take this with a grain of salt. Peter Lugers, the most famous steakhouse in NYC, has an approval rating of 60. I was shocked but it does have more than 5,000 reviews and is less service-oriented place IMHO.
+  > Pretty accurate. I've tried more than a few of the restaurants with high approval ratio for the first time and they've all been well worth the money. But take this with a grain of salt. Peter Lugers, the most famous steakhouse in NYC, has an approval rating of 60. I was shocked but it does have more than 5,000 reviews and is a less service-oriented place IMHO.
 
 - When would you suggest that I use this?
   > I use it when I know what type of food I want. Type in the name of the cuisine, sort by approval ratio, and have a detailed look on Yelp to make the final decision. You can use it in any way you'd like, though!
